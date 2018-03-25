@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/PNG/playerShip1_blue.png" type="Texture" id=3]
+
+[node name="Player" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+PLAYER_SPEED = 400
+laser = ExtResource( 2 )
+
+[node name="playerShip1" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Area2D" type="Area2D" parent="." index="1"]
+
+editor/display_folded = true
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -2.68149, -18.6743, 3.75441, -18.3736, 6.50462, -5.16528, 17.7622, 0.77471, 23.1597, -2.5666, 22.7154, 11.0455, 6.8387, 13.1119, 4.34319, 19.1509, -3.82779, 19.1519, -7.42612, 12.8548, -22.1344, 12.1262, -24.0042, -2.95214, -18.3496, 1.03173, -5.38329, -5.70564 )
+
+[node name="Canon1" type="Position2D" parent="." index="2"]
+
+position = Vector2( 23.0036, -2.82726 )
+
+[node name="Canon2" type="Position2D" parent="." index="3"]
+
+position = Vector2( -23.1321, -2.44173 )
+
+[node name="ShootTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+
+
